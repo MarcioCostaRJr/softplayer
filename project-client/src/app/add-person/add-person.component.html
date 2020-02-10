@@ -1,0 +1,31 @@
+<div>
+    <h3>Add New Person</h3>
+</div>
+<form class="example-container" [formGroup]="personForm" (ngSubmit)="addPerson(personForm.value)">
+    <mat-form-field>
+        <input matInput name="name" placeholder="Name of Person" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput name="cpf" placeholder="CPF of Person" formControlName="cpf" maxlength="14">
+    </mat-form-field>
+    <mat-form-field>
+        <input  matInput name="sexo" placeholder="Sexo of Person" formControlName="sexo">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput name="email" placeholder="Email of Person" formControlName="email">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [matDatepicker]="dateBorn" placeholder="Date of Born"
+            [formControl]="dateBorn" formControlName="dateBorn">
+        <mat-datepicker-toggle matSuffix [for]="dateBorn"></mat-datepicker-toggle>
+        <mat-datepicker #dateBorn></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput name="naturalness" placeholder="Naturalness of Person" formControlName="naturalness">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput name="nationality" placeholder="Nationality of Person" formControlName="nationality">
+    </mat-form-field>
+
+    <button mat-flat-button type="submit" [disabled]="!personForm.valid" color="accent">Add</button>
+</form>

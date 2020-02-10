@@ -1,0 +1,7 @@
+.mat-cell{
+    padding-inline-end: 20px;
+}
+
+.mat-cell:hover{
+    cursor: default;
+}
