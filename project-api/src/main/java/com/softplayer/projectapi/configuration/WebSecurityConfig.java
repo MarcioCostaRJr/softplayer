@@ -3,18 +3,12 @@
  */
 package com.softplayer.projectapi.configuration;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import com.softplayer.projectapi.service.CustomPersonDetailsService;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 
 /**
  * @author local-personal
@@ -32,10 +26,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-			.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**")
-			.permitAll().anyRequest().authenticated()
-			.and().httpBasic();
+		http.addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class);
+		http.authorizeRequests()
+	        .antMatchers("/")
+	        .permitAll()
+	        .anyRequest()
+	        .fullyAuthenticated()
+	        .and()
+	        .httpBasic()
+	        .and().csrf().disable();
 	}
 	
 //	@Bean("authenticationManager")	

@@ -19,7 +19,7 @@ import com.softplayer.projectapi.model.Person;
 @RequestMapping({"/*"})
 public class PersonAuthController {
 
-	@GetMapping(path = "/auth")
+	@GetMapping("/")
 	public Person authentication() {
 		return new Person();
 	}
