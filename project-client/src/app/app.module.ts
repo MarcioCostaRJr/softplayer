@@ -25,7 +25,9 @@ import { EditPersonComponent } from './edit-person/edit-person.component';
 import { DetailPersonComponent } from './detail-person/detail-person.component';
 import { MenuComponent } from './menu/menu.component';
 import { LoginComponent } from './login/login.component';
-import { HttpInterceptorService } from './login/http-interceptor.service';
+import { HttpInterceptorService } from './security/http-interceptor.service';
+import { ErrorInterceptorService } from './security/error-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -62,6 +64,11 @@ import { HttpInterceptorService } from './login/http-interceptor.service';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
       multi: true
+    },
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: ErrorInterceptorService, 
+      multi: true 
     }
   ],
   bootstrap: [AppComponent]

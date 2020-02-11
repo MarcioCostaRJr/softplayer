@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.softplayer.projectapi.model;
+package com.softplayer.projectapi.errors;
 
 /**
  * @author local-personal

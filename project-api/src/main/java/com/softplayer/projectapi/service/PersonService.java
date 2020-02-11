@@ -15,7 +15,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.softplayer.projectapi.model.ErrorValidation;
+import com.softplayer.projectapi.errors.ErrorValidation;
 import com.softplayer.projectapi.model.Person;
 import com.softplayer.projectapi.repository.PersonRepository;
 

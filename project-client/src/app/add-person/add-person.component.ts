@@ -23,13 +23,23 @@ export class AddPersonComponent implements OnInit {
       dateBorn : new FormControl('', [Validators.required]),
       naturalness : [null, null],
       nationality : [null, null],
-      cpf : [null, null]
+      cpf : [null, [Validators.minLength(11),Validators.maxLength(14)]],
     });
   }
 
-  addPerson(form: NgForm) {
+  formatCpf(){
+    let cpf: string = this.personForm.controls['cpf'].value;
+    if ( cpf != null && cpf.length > 10 && cpf.length < 14 
+        && !(cpf.includes('.') || cpf.includes('-'))){
+      cpf = cpf.substring(0,3) + '.' + cpf.substring(3,6) 
+            + '.' + cpf.substring(6,9) + '-' + cpf.substring(9);
+    }
+    this.personForm.controls['cpf'].setValue(cpf);
+  }
+
+  addPerson() {
     this.isLoadingResults = true;
-    this.api.addPerson(form)
+    this.api.addPerson(this.personForm.getRawValue())
       .subscribe(res => {
           const id = res.id;
           this.isLoadingResults = false;

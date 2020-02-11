@@ -63,7 +63,7 @@ public class PersonController {
 		return personService.findById(id)
 				.map(record -> {
 					record.setName(person.getName());
-					record.setSexo(person.getSexo());
+					record.setGender(person.getGender());
 					record.setEmail(person.getEmail());
 					record.setDateBorn(person.getDateBorn());
 					record.setNaturalness(person.getNaturalness());
