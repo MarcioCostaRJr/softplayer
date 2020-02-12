@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from './auth.service';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { AuthService } from '../security/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -31,11 +31,12 @@ export class LoginComponent implements OnInit {
   }
 
   handleLogin() {
+    console.log(this.username);
+    console.log(this.password);
     this.authService.authenticationService(this.username, this.password).subscribe(() => {
       this.invalidLogin = false;
       this.loginSuccess = true;
       this.successMessage = 'Login Successful.';
-      console.log('antes redi');
       this.router.navigate(['/persons']);
     }, (err) => {
       console.log(err);
@@ -44,3 +45,4 @@ export class LoginComponent implements OnInit {
     });
   }
 }
+

@@ -34,7 +34,7 @@ public class Person {
 	
 	@NotNull
 	private String name;
-	private Integer sexo;
+	private String gender;
 	private String email;
 	
 	@NotNull
