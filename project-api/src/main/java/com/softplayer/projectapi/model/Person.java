@@ -41,8 +41,7 @@ public class Person {
 	private LocalDate dateBorn;
 	private String naturalness;
 	private String nationality;
-	
-	@NotNull
+
 	private String cpf;
 	private LocalDateTime dateRegister;
 	private LocalDateTime dateRegisterUpdate;

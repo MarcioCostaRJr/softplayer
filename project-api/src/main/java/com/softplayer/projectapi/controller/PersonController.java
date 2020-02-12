@@ -5,6 +5,7 @@ package com.softplayer.projectapi.controller;
 
 import java.util.List;
 
+import com.softplayer.projectapi.controller.validator.PersonValidator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,9 +31,11 @@ import com.softplayer.projectapi.service.PersonService;
 public class PersonController {
 
 	private PersonService personService;
+	private PersonValidator personValidator;
 	
-	public PersonController(PersonService personService) {
+	public PersonController(PersonService personService, PersonValidator personValidator) {
 		this.personService = personService;
+		this.personValidator = personValidator;
 	}
 	
 	@GetMapping
@@ -48,14 +51,9 @@ public class PersonController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Person person){
-		List<?> list = personService.validateSave(person);
-		if (CollectionUtils.isEmpty(list)) {
-			Person personSaved = personService.save(person);
-			return ResponseEntity.ok().body(personSaved);
-		} else {
-			return ResponseEntity.notFound().build();
-		}
+	public Object create(@RequestBody Person person){
+		personValidator.validatePerson(person);
+		return personService.save(person);
 	}
 	
 	@PutMapping(value="/{id}")

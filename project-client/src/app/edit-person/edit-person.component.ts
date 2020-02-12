@@ -18,7 +18,7 @@ export class EditPersonComponent implements OnInit {
     this.getPerson(this.route.snapshot.params.id);
     this.personForm = this.formBuilder.group({
       name : [null, Validators.required],
-      sexo : [null, null],
+      gender : [null, null],
       email : [null, null],
       dateBorn : [null, null],
       naturalness : [null, null],
@@ -33,7 +33,7 @@ export class EditPersonComponent implements OnInit {
       this._ID = data.id;
       this.personForm.setValue({
         name : data.name,
-        sexo : data.sexo,
+        gender : data.gender,
         email : data.email,
         dateBorn : data.dateBorn,
         naturalness : data.naturalness,

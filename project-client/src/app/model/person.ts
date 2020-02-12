@@ -2,7 +2,7 @@ export class Person {
     // tslint:disable-next-line: variable-name
     id: number;
     name: string;
-    sexo: string;
+    gender: string;
     email: string;
     dateBorn: Date;
     naturalness: string;

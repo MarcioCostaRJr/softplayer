@@ -15,7 +15,19 @@ public enum ErrorValidation {
 	
 	CPF_DUPLICATE(3, "CPF duplicate");
 
-	ErrorValidation(int i, String string) {	
+	private int id;
+	private String description;
+
+	ErrorValidation(int i, String value) {
+		this.id = i;
+		this.description = value;
 	}
-		
+
+	public int getId(){
+		return this.id;
+	}
+
+	public String getDescription() {
+		return this.description;
+	}
 }

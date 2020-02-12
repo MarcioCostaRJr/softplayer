@@ -3,6 +3,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
 import { Person } from 'src/app/model/person';
+import { ErrorBusiness } from 'src/app/model/error-business';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'
@@ -63,13 +64,15 @@ export class ApiService {
       if (error instanceof ErrorEvent) {
 
           errorMessage = `An error occurred: ${error.message}`;
-      } else {
-
-          errorMessage = `Server returned code: ${error.status}, error message is: ${error.message}`;
+          console.error(errorMessage);
+          return of(result as T);
+      } else if (error.status === 400 && error.error != null){
+          let errorB: ErrorBusiness = new ErrorBusiness();
+          console.log(error);
+          errorB.statusCode = error.status;
+          errorB.description = error.error;
+          return throwError(errorB);
       }
-      console.error(errorMessage);
-
-      return of(result as T);
     };
   }
 }

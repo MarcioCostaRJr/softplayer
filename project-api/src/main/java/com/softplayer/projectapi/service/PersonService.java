@@ -42,13 +42,6 @@ public class PersonService {
 		return repository.findById(id);
 	}
 	
-	public List<?> validateSave(Person person) {		
-		List<ErrorValidation> listError = new ArrayList<>();
-		validateAddress(person, listError);
-		validateCPF(person, listError);
-		return listError;
-	}
-	
 	public Person save(Person person) {
 		infoAditional(person);
 		return repository.save(person);
@@ -56,10 +49,6 @@ public class PersonService {
 	
 	public void deleteById(Long id) {
 		repository.deleteById(id);
-	}
-	
-	private boolean isExistsCpf(String cpf) {
-		return repository.existsByCpf(cpf);
 	}
 	
 	private void infoAditional(Person person) {
@@ -70,29 +59,5 @@ public class PersonService {
 			person.setDateRegisterUpdate(dateTime);
 		}
 	}
-	
-	private void validateCPF(Person person, List<ErrorValidation> listError) {
-		boolean isValidCpf = true;
-		try {
-			new CPFValidator().assertValid(person.getCpf());
-		} catch (Exception e) {
-			isValidCpf = false;
-			listError.add(ErrorValidation.CPF_INVALID);
-		}
-		if (isValidCpf && person.getId() == null && isExistsCpf(person.getCpf())) {
-			listError.add(ErrorValidation.CPF_DUPLICATE);
-		}
-	}
-	
-	private void validateAddress(Person person, List<ErrorValidation> listError) {
-		if (Strings.isNotEmpty(person.getEmail())){
-			try {
-				InternetAddress emAddress = new InternetAddress(person.getEmail());
-				emAddress.validate();
-			} catch (AddressException ae) {
-				listError.add(ErrorValidation.EMAIL_INVALIDO);
-			}
-		}
-		
-	}
+
 }

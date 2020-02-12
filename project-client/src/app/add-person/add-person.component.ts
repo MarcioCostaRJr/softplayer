@@ -39,8 +39,10 @@ export class AddPersonComponent implements OnInit {
 
   addPerson() {
     this.isLoadingResults = true;
+    console.log(this.personForm.getRawValue());
     this.api.addPerson(this.personForm.getRawValue())
       .subscribe(res => {
+          console.log(res);
           const id = res.id;
           this.isLoadingResults = false;
           this.router.navigate(['/person-detail', id]);
