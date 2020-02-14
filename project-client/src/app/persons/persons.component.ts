@@ -19,7 +19,6 @@ export class PersonsComponent implements OnInit {
     this._api.getPersons()
       .subscribe(res => {
         this.dataSource = res;
-        console.log(this.dataSource);
       }, err => {
         console.log(err);
       });

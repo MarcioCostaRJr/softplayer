@@ -5,9 +5,7 @@ package com.softplayer.projectapi.controller;
 
 import java.util.List;
 
-import com.softplayer.projectapi.controller.validator.PersonValidator;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.softplayer.projectapi.controller.validator.PersonValidator;
 import com.softplayer.projectapi.model.Person;
 import com.softplayer.projectapi.service.PersonService;
 
@@ -67,6 +66,7 @@ public class PersonController {
 					record.setNaturalness(person.getNaturalness());
 					record.setNationality(person.getNationality());
 					record.setCpf(person.getCpf());
+					personValidator.validatePerson(record);
 					Person updated = personService.save(record);
 					return ResponseEntity.ok().body(updated);
 				}).orElse(ResponseEntity.notFound().build());

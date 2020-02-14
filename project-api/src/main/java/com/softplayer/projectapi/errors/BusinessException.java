@@ -7,7 +7,13 @@ import java.util.List;
 
 public class BusinessException extends RuntimeException {
 
-    @Getter
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+	@Getter
     private List<ErrorValidation> listError;
 
     public BusinessException(List<ErrorValidation> listE) {

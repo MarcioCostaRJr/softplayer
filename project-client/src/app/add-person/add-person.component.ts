@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, NgForm, Validators } from '@angular/forms';
 import { ApiService } from '../service/api.service';
+import { ErrorBusiness } from '../model/error-business';
 
 @Component({
   selector: 'app-add-person',
@@ -10,6 +11,7 @@ import { ApiService } from '../service/api.service';
 })
 export class AddPersonComponent implements OnInit {
 
+  errors: ErrorBusiness;
   personForm: FormGroup;
   isLoadingResults = false;
   constructor(private router: Router, private api: ApiService,
@@ -23,11 +25,11 @@ export class AddPersonComponent implements OnInit {
       dateBorn : new FormControl('', [Validators.required]),
       naturalness : [null, null],
       nationality : [null, null],
-      cpf : [null, [Validators.minLength(11),Validators.maxLength(14)]],
+      cpf : [null, [Validators.minLength(11), Validators.maxLength(14)]],
     });
   }
 
-  formatCpf(){
+  formatCpf() {
     let cpf: string = this.personForm.controls['cpf'].value;
     if ( cpf != null && cpf.length > 10 && cpf.length < 14 
         && !(cpf.includes('.') || cpf.includes('-'))){
@@ -38,17 +40,12 @@ export class AddPersonComponent implements OnInit {
   }
 
   addPerson() {
-    this.isLoadingResults = true;
-    console.log(this.personForm.getRawValue());
     this.api.addPerson(this.personForm.getRawValue())
       .subscribe(res => {
-          console.log(res);
           const id = res.id;
-          this.isLoadingResults = false;
           this.router.navigate(['/person-detail', id]);
         }, (err) => {
-          console.log(err);
-          this.isLoadingResults = false;
+          this.errors = err;
         });
   }
 }

@@ -66,9 +66,8 @@ export class ApiService {
           errorMessage = `An error occurred: ${error.message}`;
           console.error(errorMessage);
           return of(result as T);
-      } else if (error.status === 400 && error.error != null){
-          let errorB: ErrorBusiness = new ErrorBusiness();
-          console.log(error);
+      } else if (error.status === 400 && error.error != null) {
+          const errorB: ErrorBusiness = new ErrorBusiness();
           errorB.statusCode = error.status;
           errorB.description = error.error;
           return throwError(errorB);
@@ -76,16 +75,3 @@ export class ApiService {
     };
   }
 }
-
-
-/**
- * https://www.devglan.com/angular/angular-7-crud-example
- *
- *
- * https://medium.com/@andrewchanm/criando-um-app-angular-7-e-consumindo-uma-api-rest-1-de-3-7169d90ed8c1
- * https://medium.com/@andrewchanm/criando-um-app-angular-7-e-consumindo-uma-api-rest-2-de-3-5747972ef56e
- * https://medium.com/@andrewchanm/criando-um-app-angular-7-e-consumindo-uma-api-rest-3-de-3-7d3b22aa09a6
- *
- * 
- * https://www.javaguides.net/2019/08/angular-8-spring-boot-basic-authentication-example.html
- */

@@ -10,7 +10,6 @@ import { Person } from '../model/person';
 })
 export class DetailPersonComponent implements OnInit {
   person: Person = new Person();
-  isLoadingResults = true;
   constructor(private router: Router, private route: ActivatedRoute,
               private api: ApiService) { }
 
@@ -22,17 +21,14 @@ export class DetailPersonComponent implements OnInit {
     this.api.getPerson(id)
       .subscribe(data => {
         this.person = data;
-        this.isLoadingResults = false;
       });
   }
 
   deletePerson(id: number) {
     this.api.deletePerson(id)
       .subscribe(res => {
-        this.isLoadingResults = false;
-        this.router.navigate(['/']);
+        this.router.navigate(['/persons']);
       }, err => {
-        this.isLoadingResults = false;
         console.log(err);
       });
   }

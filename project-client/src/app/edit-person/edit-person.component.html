@@ -1,7 +1,7 @@
 <div>
     <h3>Editar Produto</h3>
 </div>
-<form class="example-container" [formGroup]="personForm" (ngSubmit)="updatePerson(personForm.value)">
+<form class="example-container" [formGroup]="personForm" (ngSubmit)="updatePerson()">
     <mat-form-field>
         <input matInput name="name" placeholder="Name of Person" formControlName="name">
     </mat-form-field>
@@ -9,7 +9,7 @@
         <input matInput name="cpf" placeholder="CPF of Person" formControlName="cpf" maxlength="14">
     </mat-form-field>
     <mat-form-field>
-        <input  matInput name="gender" placeholder="Sexo of Person" formControlName="gender">
+        <input  matInput name="gender" placeholder="Gender of Person" formControlName="gender">
     </mat-form-field>
     <mat-form-field>
         <input matInput name="email" placeholder="Email of Person" formControlName="email">
@@ -25,4 +25,15 @@
     </mat-form-field>
 
     <button mat-flat-button type="submit" [disabled]="!personForm.valid" color="accent">Editar</button>
+
+    <div *ngIf="personForm.controls['cpf'].hasError('minlength') || personForm.controls['cpf'].hasError('maxlength')">
+        <b>Errors:</b><br/>
+        <p class="alert alert-warning">CPF exceeded allowed characters</p>
+    </div>
+    <div class="painel-danger-red" *ngIf="errors != null">
+        <b>Errors:</b><br/>
+        <ul *ngFor=" let errMsg of errors.description ">
+            <li class="alert">{{errMsg}}</li>
+        </ul>
+    </div>
 </form>

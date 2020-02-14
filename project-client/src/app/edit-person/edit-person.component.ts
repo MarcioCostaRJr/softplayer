@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
+import { ErrorBusiness } from '../model/error-business';
 
 @Component({
   selector: 'app-edit-person',
@@ -11,6 +12,7 @@ import { ApiService } from 'src/app/service/api.service';
 export class EditPersonComponent implements OnInit {
   _ID = 0;
   personForm: FormGroup;
+  errors: ErrorBusiness;
 
   constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder) { }
 
@@ -20,10 +22,10 @@ export class EditPersonComponent implements OnInit {
       name : [null, Validators.required],
       gender : [null, null],
       email : [null, null],
-      dateBorn : [null, null],
+      dateBorn : new FormControl('', [Validators.required]),
       naturalness : [null, null],
       nationality : [null, null],
-      cpf : [null, null]
+      cpf : [null, [Validators.minLength(11), Validators.maxLength(14)]]
     });
   }
 
@@ -45,12 +47,22 @@ export class EditPersonComponent implements OnInit {
     });
   }
 
-  updatePerson(form: NgForm) {
-    this.api.editPerson(this._ID, form)
+  updatePerson() {
+    this.api.editPerson(this._ID, this.personForm.getRawValue())
       .subscribe(res => {
         this.router.navigate(['/person-detail', res.id]);
       }, err => {
-        console.log(err);
+        this.errors = err;
       });
+  }
+
+  formatCpf() {
+    let cpf: string = this.personForm.controls['cpf'].value;
+    if ( cpf != null && cpf.length > 10 && cpf.length < 14 
+        && !(cpf.includes('.') || cpf.includes('-'))){
+      cpf = cpf.substring(0,3) + '.' + cpf.substring(3,6) 
+            + '.' + cpf.substring(6,9) + '-' + cpf.substring(9);
+    }
+    this.personForm.controls['cpf'].setValue(cpf);
   }
 }

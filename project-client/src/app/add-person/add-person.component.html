@@ -31,5 +31,11 @@
         <b>Errors:</b><br/>
         <p class="alert alert-warning">CPF exceeded allowed characters</p>
     </div>
+    <div class="painel-danger-red" *ngIf="errors != null">
+        <b>Errors:</b><br/>
+        <ul *ngFor=" let errMsg of errors.description ">
+            <li class="alert">{{errMsg}}</li>
+        </ul>
+    </div>
 </form>
  
