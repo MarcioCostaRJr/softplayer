@@ -3,27 +3,37 @@
   </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
+    <ng-container matColumnDef="name" class="columnList">
+      <th mat-header-cell *matHeaderCellDef class="columnList"> Name </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
   
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> E-mail </th>
+    <ng-container matColumnDef="email" class="columnList">
+      <th mat-header-cell *matHeaderCellDef class="columnList"> E-mail </th>
       <td mat-cell *matCellDef="let element"> {{element.email}} </td>
     </ng-container>
   
-    <ng-container matColumnDef="cpf">
-      <th mat-header-cell *matHeaderCellDef> CPF </th>
+    <ng-container matColumnDef="cpf" class="columnList">
+      <th mat-header-cell *matHeaderCellDef class="columnList"> CPF </th>
       <td mat-cell *matCellDef="let element"> {{element.cpf}} </td>
     </ng-container>
   
-    <ng-container matColumnDef="naturalness">
-      <th mat-header-cell *matHeaderCellDef> Naturalness </th>
+    <ng-container matColumnDef="naturalness" class="columnList">
+      <th mat-header-cell *matHeaderCellDef class="columnList"> Naturalness </th>
       <td mat-cell *matCellDef="let element"> {{element.naturalness}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="action">
+    <ng-container matColumnDef="dateRegister" class="columnList">
+      <th mat-header-cell *matHeaderCellDef class="columnList"> Date Register </th>
+      <td mat-cell *matCellDef="let element"> {{element.dateRegister}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateRegisterUpdate">
+      <th mat-header-cell *matHeaderCellDef class="columnList"> Date Register Update </th>
+      <td mat-cell *matCellDef="let element"> {{element.dateRegisterUpdate}} </td>
+    </ng-container>
+
+   <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>  </th>
         <td mat-cell *matCellDef="let element"> 
             <button mat-flat-button color="accent" routerLink="/person-detail/{{element.id}}" selected>Detail</button>

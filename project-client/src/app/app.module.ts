@@ -65,10 +65,10 @@ import { ErrorInterceptorService } from './security/error-interceptor.service';
       useClass: HttpInterceptorService,
       multi: true
     },
-    { 
-      provide: HTTP_INTERCEPTORS, 
-      useClass: ErrorInterceptorService, 
-      multi: true 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptorService,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

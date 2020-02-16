@@ -9,7 +9,8 @@ import { Person } from 'src/app/model/person';
 })
 export class PersonsComponent implements OnInit {
 
-  displayedColumns: string[] = [ 'name', 'email', 'cpf', 'naturalness', 'action'];
+  displayedColumns: string[] = [ 'name', 'email', 'cpf', 'naturalness',
+              'dateRegister', 'dateRegisterUpdate', 'action'];
   dataSource: Person[];
 
   // tslint:disable-next-line: variable-name

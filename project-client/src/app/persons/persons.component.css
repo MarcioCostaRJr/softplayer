@@ -5,3 +5,8 @@
 .mat-cell:hover{
     cursor: default;
 }
+
+.columnList {
+    padding-inline-end: 20px;
+    color: blue;
+}
