@@ -8,6 +8,8 @@ export class Person {
     naturalness: string;
     nationality: string;
     cpf: string;
+    dateRegister: Date;
+    dateRegisterUpdate: Date;
 
     public constructor(init?: Partial<Person>) {
         Object.assign(this, init);

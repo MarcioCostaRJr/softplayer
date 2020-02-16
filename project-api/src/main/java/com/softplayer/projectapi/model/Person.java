@@ -12,6 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,7 +47,13 @@ public class Person {
 	private String nationality;
 
 	private String cpf;
+	
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm")
 	private LocalDateTime dateRegister;
+	
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm")
 	private LocalDateTime dateRegisterUpdate;
 
 }
