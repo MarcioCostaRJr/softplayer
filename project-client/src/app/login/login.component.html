@@ -5,10 +5,10 @@
     <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
     <div class="alert alert-success" *ngIf='loginSuccess'>{{successMessage}}</div>
   <mat-form-field>
-      <input matInput name="username" placeholder="username of Person" id="username" [(ngModel)]="username">
+      <input matInput name="username" placeholder="Username" id="username" [(ngModel)]="username">
   </mat-form-field>
   <mat-form-field>
-      <input type="password" matInput name="password"  placeholder="Password of Person" [(ngModel)]="password" id="password">
+      <input type="password" matInput name="password"  placeholder="Password" [(ngModel)]="password" id="password">
   </mat-form-field>
   <button mat-flat-button type="submit" (click)=handleLogin()  color="accent">Enter</button>
 </form>
