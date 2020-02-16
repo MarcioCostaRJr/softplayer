@@ -12,6 +12,8 @@ import { AuthService } from '../security/auth.service';
 })
 export class MenuComponent {
 
+  private urlGitHub = 'https://github.com/MarcioCostaRJr/softplayer';
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -23,9 +25,12 @@ export class MenuComponent {
               private authService: AuthService,
               private router: Router ) {}
 
-  logout(){
+  logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
 
+  redirectSource() {
+    window.open(this.urlGitHub);
+  }
 }
