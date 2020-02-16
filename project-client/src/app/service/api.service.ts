@@ -20,14 +20,14 @@ export class ApiService {
 
   getPersons(): Observable<Person[]> {
     return this.http.get<Person[]>(apiUrl)
-      .pipe(tap(() => console.log('List all persons')),
+      .pipe(tap(() => console.log()),
             catchError(this.handleError('getPersons', [])));
   }
 
   getPerson(id: number): Observable<Person> {
     const url = `${apiUrl}/${id}`;
     return this.http.get<Person>(url).pipe(
-      tap(_ => console.log(`read a person id=${id}`)),
+      tap(_ => console.log()),
       catchError(this.handleError<Person>(`getPerson id=${id}`))
     );
   }
@@ -35,7 +35,7 @@ export class ApiService {
   addPerson(person): Observable<Person> {
     return this.http.post<Person>(apiUrl, person, httpOptions).pipe(
       // tslint:disable-next-line:no-shadowed-variable
-      tap((person: Person) => console.log(`add person with w/ id=${person.id}`)),
+      tap((person: Person) => console.log()),
       catchError(this.handleError<Person>('addPerson'))
     );
   }
@@ -43,7 +43,7 @@ export class ApiService {
   editPerson(id: number, person: any): Observable<any> {
     const url = `${apiUrl}/${id}`;
     return this.http.put(url, person, httpOptions).pipe(
-      tap(_ => console.log(`update person with id=${id}`)),
+      tap(_ => console.log()),
       catchError(this.handleError<any>('editPerson'))
     );
   }
@@ -52,7 +52,7 @@ export class ApiService {
     const url = `${apiUrl}/${id}`;
 
     return this.http.delete<Person>(url, httpOptions).pipe(
-      tap(_ => console.log(`remove a person with id=${id}`)),
+      tap(_ => console.log()),
       catchError(this.handleError<Person>('deletePerson'))
     );
   }

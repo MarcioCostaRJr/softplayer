@@ -31,7 +31,6 @@ export class EditPersonComponent implements OnInit {
 
   getPerson(id: number) {
     this.api.getPerson(id).subscribe(data => {
-      console.log(data);
       this._ID = data.id;
       this.personForm.setValue({
         name : data.name,
