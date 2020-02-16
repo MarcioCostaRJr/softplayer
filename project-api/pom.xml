@@ -15,6 +15,8 @@
 	<description>Project for softplayer</description>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 	</properties>
 
@@ -69,6 +71,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<finalName>softplayer-api</finalName>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

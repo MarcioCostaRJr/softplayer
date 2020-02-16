@@ -4,11 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.config.json",
-    "build": "ng build",
+    "build": "ng build --prod",
+    "postbuild": "npm run deploy",
+    "predeploy": "rimraf ../project-api/src/main/resources/static/ && mkdirp ../project-api/src/main/resources/static",
+    "deploy": "copyfiles -f dist/project-client/** ../project-api/src/main/resources/static",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
-  },
+  }, 
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.0.0",
